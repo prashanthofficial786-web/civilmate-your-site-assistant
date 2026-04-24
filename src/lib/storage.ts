@@ -36,3 +36,56 @@ export function getRecent(): { type: "standard" | "checklist" | "calculator"; id
     return [];
   }
 }
+
+import type { Checklist } from "@/data/checklists";
+
+export function getCustomChecklists(): Checklist[] {
+  try {
+    const raw = localStorage.getItem(PREFIX + "custom_checklists");
+    return raw ? JSON.parse(raw) : [];
+  } catch {
+    return [];
+  }
+}
+
+export function saveCustomChecklist(checklist: Checklist) {
+  try {
+    const existing = getCustomChecklists();
+    const existingIndex = existing.findIndex((c) => c.id === checklist.id);
+    if (existingIndex >= 0) {
+      existing[existingIndex] = checklist;
+    } else {
+      existing.push(checklist);
+    }
+    localStorage.setItem(PREFIX + "custom_checklists", JSON.stringify(existing));
+  } catch {
+    /* ignore */
+  }
+}
+
+export type SavedCalculation = {
+  id: string;
+  type: string;
+  title: string;
+  date: string;
+  data: any;
+};
+
+export function getSavedCalculations(): SavedCalculation[] {
+  try {
+    const raw = localStorage.getItem(PREFIX + "saved_calculations");
+    return raw ? JSON.parse(raw) : [];
+  } catch {
+    return [];
+  }
+}
+
+export function saveCalculation(calc: SavedCalculation) {
+  try {
+    const existing = getSavedCalculations();
+    existing.unshift(calc);
+    localStorage.setItem(PREFIX + "saved_calculations", JSON.stringify(existing));
+  } catch {
+    /* ignore */
+  }
+}

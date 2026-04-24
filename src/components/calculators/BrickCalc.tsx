@@ -66,58 +66,93 @@ Mortar: ${ratio}
   };
 
   return (
-    <div className="space-y-4">
-      <Card className="p-5 space-y-4">
-        <div className="grid grid-cols-2 gap-3">
-          <div className="space-y-2">
-            <Label>Length (m)</Label>
-            <Input type="number" inputMode="decimal" value={length} onChange={(e) => setLength(e.target.value)} className="h-12" />
+    <div className="space-y-6">
+      <Card className="p-6 space-y-6 border-0 shadow-sm rounded-[2rem] bg-white">
+        <div className="flex items-center justify-between px-1">
+          <h3 className="text-xs font-bold uppercase tracking-[0.15em] text-muted-foreground">Wall Dimensions</h3>
+        </div>
+        <div className="grid grid-cols-2 gap-4">
+          <div className="space-y-2.5">
+            <Label className="text-[11px] font-bold text-foreground/70 ml-1">Length (m)</Label>
+            <Input 
+              type="number" 
+              inputMode="decimal" 
+              value={length} 
+              onChange={(e) => setLength(e.target.value)} 
+              className="h-14 rounded-[1.25rem] bg-muted/30 border-0 text-lg font-medium transition-all focus:ring-2 focus:ring-primary/20" 
+            />
           </div>
-          <div className="space-y-2">
-            <Label>Height (m)</Label>
-            <Input type="number" inputMode="decimal" value={height} onChange={(e) => setHeight(e.target.value)} className="h-12" />
+          <div className="space-y-2.5">
+            <Label className="text-[11px] font-bold text-foreground/70 ml-1">Height (m)</Label>
+            <Input 
+              type="number" 
+              inputMode="decimal" 
+              value={height} 
+              onChange={(e) => setHeight(e.target.value)} 
+              className="h-14 rounded-[1.25rem] bg-muted/30 border-0 text-lg font-medium transition-all focus:ring-2 focus:ring-primary/20" 
+            />
           </div>
         </div>
-        <div className="grid grid-cols-2 gap-3">
-          <div className="space-y-2">
-            <Label>Thickness (m)</Label>
+        <div className="grid grid-cols-2 gap-4">
+          <div className="space-y-2.5">
+            <Label className="text-[11px] font-bold text-foreground/70 ml-1">Thickness</Label>
             <Select value={thickness} onValueChange={setThickness}>
-              <SelectTrigger className="h-12"><SelectValue /></SelectTrigger>
-              <SelectContent>
-                <SelectItem value="0.115">115 mm (half brick)</SelectItem>
-                <SelectItem value="0.23">230 mm (full brick)</SelectItem>
-                <SelectItem value="0.345">345 mm (1.5 brick)</SelectItem>
+              <SelectTrigger className="h-14 rounded-[1.25rem] bg-muted/30 border-0 text-sm font-medium">
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent className="rounded-[1.5rem] border-0 shadow-2xl">
+                <SelectItem value="0.115">115 mm (Half)</SelectItem>
+                <SelectItem value="0.23">230 mm (Full)</SelectItem>
+                <SelectItem value="0.345">345 mm (1.5)</SelectItem>
               </SelectContent>
             </Select>
           </div>
-          <div className="space-y-2">
-            <Label>Mortar ratio</Label>
+          <div className="space-y-2.5">
+            <Label className="text-[11px] font-bold text-foreground/70 ml-1">Mortar Ratio</Label>
             <Select value={ratio} onValueChange={setRatio}>
-              <SelectTrigger className="h-12"><SelectValue /></SelectTrigger>
-              <SelectContent>
+              <SelectTrigger className="h-14 rounded-[1.25rem] bg-muted/30 border-0 text-sm font-medium">
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent className="rounded-[1.5rem] border-0 shadow-2xl">
                 {Object.keys(MORTAR_RATIOS).map((m) => (
-                  <SelectItem key={m} value={m}>{m} (cement:sand)</SelectItem>
+                  <SelectItem key={m} value={m}>{m} ratio</SelectItem>
                 ))}
               </SelectContent>
             </Select>
           </div>
         </div>
-        <div className="space-y-2">
-          <Label>Mortar fraction (%)</Label>
-          <Input type="number" inputMode="decimal" value={mortarPct} onChange={(e) => setMortarPct(e.target.value)} className="h-12" />
+        <div className="space-y-2.5">
+          <Label className="text-[11px] font-bold text-foreground/70 ml-1">Mortar fraction (%)</Label>
+          <Input 
+            type="number" 
+            inputMode="decimal" 
+            value={mortarPct} 
+            onChange={(e) => setMortarPct(e.target.value)} 
+            className="h-14 rounded-[1.25rem] bg-muted/30 border-0 text-lg font-medium transition-all focus:ring-2 focus:ring-primary/20" 
+          />
         </div>
       </Card>
 
-      <Card className="p-5">
-        <div className="text-xs uppercase tracking-wider text-muted-foreground font-semibold mb-2">Materials required</div>
-        <ResultRow label="Wall area" value={r.area} unit="m²" />
-        <ResultRow label="Bricks" value={r.bricks} unit="nos" />
-        <ResultRow label="Cement" value={r.bags} unit={`bags (${r.cementKg} kg)`} />
-        <ResultRow label="Sand" value={r.sand} unit="m³" />
-        <Button onClick={copy} className="w-full mt-4 h-12 text-base">
-          {copied ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
-          {copied ? "Copied" : "Copy result"}
-        </Button>
+      <Card className="p-8 border-0 shadow-xl rounded-[2.5rem] bg-white relative overflow-hidden">
+        <div className="absolute -bottom-20 -right-20 w-64 h-64 bg-primary/5 rounded-full blur-3xl pointer-events-none" />
+        
+        <div className="relative z-10">
+          <div className="text-[11px] uppercase tracking-[0.2em] text-muted-foreground font-black mb-6 px-1">Estimate Results</div>
+          <div className="space-y-4">
+            <ResultRow label="Wall area" value={r.area} unit="m²" />
+            <ResultRow label="Total Bricks" value={r.bricks} unit="nos" />
+            <ResultRow label="Cement Bags" value={r.bags} unit={`bags (${r.cementKg} kg)`} />
+            <ResultRow label="Sand Vol." value={r.sand} unit="m³" />
+          </div>
+          
+          <button 
+            onClick={copy} 
+            className="w-full mt-8 h-14 rounded-full bg-[#1C1C1E] text-primary font-bold text-sm shadow-xl hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center justify-center gap-2"
+          >
+            {copied ? <Check className="h-5 w-5" strokeWidth={3} /> : <Copy className="h-5 w-5" strokeWidth={3} />}
+            {copied ? "Copied" : "Copy Estimate"}
+          </button>
+        </div>
       </Card>
     </div>
   );

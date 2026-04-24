@@ -8,45 +8,47 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    /* CivilMate — construction blue + safety amber */
-    --background: 210 25% 98%;
-    --foreground: 215 35% 14%;
+    /* CivilMate — Modern Finance/Wallet Theme */
+    --background: 210 20% 98%;
+    --foreground: 240 5% 10%;
 
     --card: 0 0% 100%;
-    --card-foreground: 215 35% 14%;
+    --card-foreground: 240 5% 10%;
+    --card-dark: 240 5% 10%;
+    --card-dark-foreground: 0 0% 100%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 215 35% 14%;
+    --popover-foreground: 240 5% 10%;
 
-    --primary: 214 78% 28%;
-    --primary-foreground: 0 0% 100%;
-    --primary-glow: 214 80% 42%;
+    --primary: 84 100% 68%;
+    --primary-foreground: 240 5% 10%;
+    --primary-glow: 84 100% 50%;
 
-    --secondary: 210 30% 94%;
-    --secondary-foreground: 215 35% 18%;
+    --secondary: 210 20% 95%;
+    --secondary-foreground: 240 5% 10%;
 
-    --muted: 210 25% 95%;
-    --muted-foreground: 215 16% 42%;
+    --muted: 210 20% 95%;
+    --muted-foreground: 215 16% 45%;
 
-    --accent: 38 95% 52%;
-    --accent-foreground: 215 40% 12%;
+    --accent: 84 100% 68%;
+    --accent-foreground: 240 5% 10%;
 
-    --success: 152 60% 36%;
-    --success-foreground: 0 0% 100%;
+    --success: 84 100% 68%;
+    --success-foreground: 240 5% 10%;
 
-    --destructive: 0 78% 52%;
+    --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 214 25% 88%;
-    --input: 214 25% 88%;
-    --ring: 214 78% 28%;
+    --border: 210 20% 90%;
+    --input: 210 20% 90%;
+    --ring: 84 100% 68%;
 
-    --radius: 0.85rem;
+    --radius: 1.5rem;
 
-    --gradient-primary: linear-gradient(135deg, hsl(214 78% 28%), hsl(214 80% 42%));
-    --gradient-accent: linear-gradient(135deg, hsl(38 95% 52%), hsl(28 95% 55%));
-    --shadow-card: 0 2px 10px -2px hsl(214 50% 20% / 0.08);
-    --shadow-elevated: 0 12px 32px -12px hsl(214 60% 22% / 0.25);
+    --gradient-primary: linear-gradient(135deg, hsl(240 5% 10%), hsl(240 5% 15%));
+    --gradient-accent: linear-gradient(135deg, hsl(84 100% 68%), hsl(84 100% 50%));
+    --shadow-card: 0 4px 20px -4px hsl(240 5% 10% / 0.05);
+    --shadow-elevated: 0 12px 32px -12px hsl(240 5% 10% / 0.1);
 
     --sidebar-background: 0 0% 98%;
 

@@ -20,29 +20,29 @@ export default function AppLayout() {
   const showHeader = pathname in titleMap;
 
   return (
-    <div className="min-h-screen bg-background flex flex-col">
+    <div className="min-h-screen bg-background flex flex-col font-sans">
       {showHeader && (
-        <header className="sticky top-0 z-40 bg-[image:var(--gradient-primary)] text-primary-foreground shadow-[var(--shadow-card)]">
-          <div className="mx-auto w-full max-w-2xl px-5 py-4 flex items-center gap-3">
-            <div className="h-10 w-10 rounded-xl bg-accent text-accent-foreground grid place-items-center shadow-[var(--shadow-card)]">
+        <header className="sticky top-0 z-40 bg-background/80 backdrop-blur-md">
+          <div className="mx-auto w-full max-w-2xl px-5 py-5 flex items-center gap-3">
+            <div className="h-10 w-10 rounded-2xl bg-white text-foreground grid place-items-center shadow-sm border border-border">
               <HardHat className="h-5 w-5" />
             </div>
             <div className="leading-tight">
-              <h1 className="text-lg font-bold tracking-tight">{titleMap[pathname]}</h1>
-              <p className="text-xs text-primary-foreground/80">
-                {pathname === "/" ? "Site assistant for civil engineers" : "Concrete & RCC reference"}
+              <h1 className="text-xl font-bold tracking-tight text-foreground">{titleMap[pathname]}</h1>
+              <p className="text-xs text-muted-foreground font-medium">
+                {pathname === "/" ? "Good Morning!" : "Site Reference"}
               </p>
             </div>
           </div>
         </header>
       )}
 
-      <main className="flex-1 mx-auto w-full max-w-2xl px-4 pt-4 pb-28">
+      <main className="flex-1 mx-auto w-full max-w-2xl px-4 pt-2 pb-32">
         <Outlet />
       </main>
 
-      <nav className="fixed bottom-0 inset-x-0 z-50 bg-card/95 backdrop-blur border-t border-border">
-        <div className="mx-auto max-w-2xl grid grid-cols-4">
+      <nav className="fixed bottom-6 inset-x-0 z-50 flex justify-center px-4">
+        <div className="bg-[#1C1C1E] rounded-[2rem] p-2 flex items-center justify-between w-full max-w-sm shadow-2xl">
           {tabs.map((t) => (
             <NavLink
               key={t.to}
@@ -50,22 +50,17 @@ export default function AppLayout() {
               end={t.end}
               className={({ isActive }) =>
                 cn(
-                  "flex flex-col items-center justify-center gap-1 py-2.5 text-[11px] font-medium transition-colors min-h-[60px]",
-                  isActive ? "text-primary" : "text-muted-foreground hover:text-foreground",
+                  "flex items-center gap-2 px-4 py-3 rounded-full text-sm font-medium transition-all duration-300",
+                  isActive 
+                    ? "bg-primary text-[#1C1C1E]" 
+                    : "text-white/60 hover:text-white"
                 )
               }
             >
               {({ isActive }) => (
                 <>
-                  <span
-                    className={cn(
-                      "h-9 w-12 grid place-items-center rounded-full transition-colors",
-                      isActive && "bg-primary/10",
-                    )}
-                  >
-                    <t.icon className="h-5 w-5" />
-                  </span>
-                  {t.label}
+                  <t.icon className={cn("h-5 w-5", isActive ? "stroke-[2.5px]" : "stroke-2")} />
+                  {isActive && <span>{t.label}</span>}
                 </>
               )}
             </NavLink>
